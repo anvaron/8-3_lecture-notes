@@ -1,19 +1,24 @@
 /**
  * 1
  *
- * The .every() method expects at least one argument. What data type is this argument?
+ * The .every() method expects at least one argument. every((element) => {  } )
+ * What data type is this argument?
  * What is a callback function?
+ * 
  */
+
 
 /**
  * 2
  *
- * The .every() method's callback function has up to three parameters. What are these parameters?
+ * The .every() method's callback function has up to three parameters. 
+ * What are these parameters?
  */
 /**
  * 3
  *
- * Take a look at the following code, which is incomplete. Based on how the code reads, what do you expect the .every() method to do?
+ * Take a look at the following code, which is incomplete. 
+ * Based on how the code reads, what do you expect the .every() method to do?
  */
 
 const comics = [
@@ -28,7 +33,9 @@ function isPrintComic(comic) {
 }
 
 const arePrintcomics = comics.every(isPrintComic);
+const areSomePrintcomics = comics.some(isPrintComic);
 console.log(arePrintcomics); //> false
+console.log(areSomePrintcomics); //> false
 
 /**
  * 4

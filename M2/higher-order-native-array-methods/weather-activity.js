@@ -1,3 +1,4 @@
+const { find } = require("./weather-data.js");
 const weatherData = require("./weather-data.js");
 
 /**
@@ -10,7 +11,13 @@ const weatherData = require("./weather-data.js");
  * @param {Object[]} forecast
  * @returns {Object[]} - filtered list containing warm days
  */
-function daysWarmerThan50(forecast) {}
+function daysWarmerThan50(forecast) {
+    const findDaysWarmer = forecast.find(day => day.highTemp > 50)
+    console.log(findDaysWarmer)
+    return findDaysWarmer;
+}
+
+daysWarmerThan50(weatherData)
 
 /**
  * 2. Get a list of the highs and lows for each day.

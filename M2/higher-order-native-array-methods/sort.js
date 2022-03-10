@@ -27,7 +27,8 @@ console.log(res2); //> [ 0, 1, 11, 2, 22 ]
 /**
  * 4
  *
- * In general, you should not use the .sort() method without a callback function. However, can you describe why the .sort() method is organizing the numbers above in this way?
+ * In general, you should not use the .sort() method without a callback function. 
+ * However, can you describe why the .sort() method is organizing the numbers above in this way?
  */
 
 /**
@@ -45,28 +46,31 @@ console.log(res2); //> [ 0, 1, 11, 2, 22 ]
 /**
  * 7
  *
- * The .sort() method's callback function expects a number to be returned. The number must either be a positive number, a negative number, or 0. What is the effect of each of these values?
+ * The .sort() method's callback function expects a number to be returned. 
+ * The number must either be a positive number, a negative number, or 0. What is the effect of each of these values?
  */
 
 /**
  * 8
  *
- * The code below sorts numbers appropriately. Based on what you know about sort() will the numbers be sorted in ascending order (i.e. 0, 1, 2...) or descending order (i.e. 22, 11, 2...)?
+ * The code below sorts numbers appropriately. Based on what you know about sort() will the numbers be sorted in ascending order (i.e. 0, 1, 2...) 
+ * or descending order (i.e. 22, 11, 2...)?
  */
 
 const numArr3 = [11, 1, 0, 22, 2];
 const res3 = numArr3.sort((a, b) => {
-  if (a > b) {
+  if (a < b) {
     return -1;
   }
 
-  if (a < b) {
+  if (a > b) {
     return 1;
   }
 
   return 0;
 });
 
+console.log('res3');
 console.log(res3);
 
 /**
