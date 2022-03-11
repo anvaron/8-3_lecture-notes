@@ -146,10 +146,10 @@ let sum3 = arr2.reduce(adder, 5);
  */
 
 function stringConcat(arr) {
-  // your code here
+  return arr.reduce((acc, cur) => acc + cur, '')
 }
+console.log(stringConcat([1, 2, 3])); // "123"
 
-// console.log(stringConcat([1, 2, 3])); // "123"
 /**
  * 5
  *
@@ -159,7 +159,7 @@ function stringConcat(arr) {
  */
 
 function totalVotes(arr) {
-  // your code here
+  return arr.reduce((acc, cur) => (cur.voted) ? acc += 1 : acc, 0)
 }
 
 const voters = [
@@ -176,7 +176,7 @@ const voters = [
   { name: 'Jeff', age: 30, voted: true },
   { name: 'Zack', age: 19, voted: false },
 ];
-// console.log(totalVotes(voters)); // 7
+console.log(totalVotes(voters)); // 7
 
 /**
  * 6
@@ -185,7 +185,7 @@ const voters = [
  */
 
 function shoppingSpree(arr) {
-  // your code here
+  return arr.reduce((acc, cur) => acc + cur.price, 0)
 }
 
 const wishlist = [
@@ -196,7 +196,8 @@ const wishlist = [
   { title: 'A second Tesla Model S', price: 90000 },
 ];
 
-// console.log(shoppingSpree(wishlist)); // 227005
+console.log(shoppingSpree(wishlist)); // 227005
+
 /**
  * 7
  *
@@ -206,32 +207,80 @@ const wishlist = [
  */
 
 function flatten(arr) {
-  // your code here
+  return arr.reduce((acc, cur) => acc.concat(cur), [])
 }
 
 const arrays = [['1', '2', '3'], [true], [4, 5, 6]];
 
-// console.log(flatten(arrays)); // ["1", "2", "3", true, 4, 5, 6];
+console.log(flatten(arrays)); // ["1", "2", "3", true, 4, 5, 6];
 
 /**
  * 8
  *
  * Given the array of potential voters above, return an object representing the results of the vote
  *
- * Include how many of the potential voters were in the ages 18-25, how many from 26-35, how many from 36-55, and how many of each of those age ranges actually voted. The resulting object containing this data should have 6 properties. See the example output at the bottom.
+ * Include 
+ * how many of the potential voters were in the ages 18-25, 
+ * how many from 26-35, 
+ * how many from 36-55, and 
+ * how many of each of those age ranges actually voted. 
+ * The resulting object containing this data should have 6 properties. See the example output at the bottom.
  */
-
+//  const voters = [
+//   { name: 'Bob', age: 30, voted: true }, 26-35
+//   { name: 'Jake', age: 32, voted: true }, 26-35
+//   { name: 'Kate', age: 25, voted: false }, 18-25
+//   { name: 'Sam', age: 20, voted: false }, 18-25
+//   { name: 'Phil', age: 21, voted: true }, 18-25
+//   { name: 'Ed', age: 55, voted: true }, 36-55
+//   { name: 'Tami', age: 54, voted: true }, 36-55
+//   { name: 'Mary', age: 31, voted: false }, 26-35
+//   { name: 'Becky', age: 43, voted: false }, 36-55
+//   { name: 'Joey', age: 41, voted: true }, 36-55
+//   { name: 'Jeff', age: 30, voted: true }, 26-35
+//   { name: 'Zack', age: 19, voted: false }, 18-25
+// ];
+// 18-25 = 4
+// 26-35 = 4
+// 36-55 = 4
+// function voterResults(arr) {
+//   //return arr.reduce((acc, cur) => (acc[cur.age] = (acc[cur.age] || 0)+1, acc), {} )
+//   const obj ={};
+  
+//   arr.reduce((acc, el) => (el.age >= 18 && el.age <= 25 ? obj.numYoungPeople = acc += 1 : obj.numYoungPeople = acc ), 0)
+//   arr.reduce((acc, el) => ((el.voted && (el.age >= 18 && el.age <= 25)) ? obj.numYoungVotes = acc += 1 : obj.numYoungVotes = acc ), 0)
+//   return obj;
+// }
 function voterResults(arr) {
   // your code here
-}
+  return arr.reduce((acc, current)=>{
+    if(current.age <= 25){
+      acc['numYoungPeople']!= undefined? acc['numYoungPeople']++: acc['numYoungPeople']=1;
+      if(current.voted){
+        acc['numYoungVotes']? acc['numYoungVotes']++: acc['numYoungVotes']=1;
+      }
+    } else if(current.age <= 35){
+      acc['numMidPeople']!= undefined? acc['numMidPeople']++: acc['numMidPeople']=1;
+      if(current.voted){
+        acc['numMidVotes']? acc['numMidVotes']++: acc['numMidVotes']=1;
+      }
+    } else {
+      acc['numOldPeople']!= undefined? acc['numOldPeople']++: acc['numOldPeople']=1;
+      if(current.voted){
+        acc['numOldVotes']? acc['numOldVotes']++: acc['numOldVotes']=1;
+      }
+    }
+    return acc;
+  }, {});
+} 
 
-// console.log(voterResults(voters)); // Returned value shown below:
+console.log(voterResults(voters)); // Returned value shown below:
 /*
-{ numYoungVotes: 1,
-  numYoungPeople: 4,
-  numMidVotesPeople: 3,
+{ numYoungVotes: 1, => 18-25
+  numYoungPeople: 4, (false)
+  numMidVotesPeople: 3, => 26-35
   numMidsPeople: 4,
-  numOldVotesPeople: 3,
+  numOldVotesPeople: 3, => 36-55
   numOldsPeople: 4 
 }
 */
