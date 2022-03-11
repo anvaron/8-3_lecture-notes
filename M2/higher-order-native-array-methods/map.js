@@ -1,52 +1,3 @@
-/**
- * Array.map(fn) <-- higher order since it takes a fn parameter
- *
- * Side Effects: map CAN produce them, but this is bad practice
- *
- * Return Value: DOES return a value
- *
- * We want to transform an array
- */
-
-let soccerTeams = [
-  'Manchester United',
-  'Real Madrid',
-  'Boca Juniors',
-  'NYC FC',
-];
-
-function printTeamSupport(team) {
-  return `I am a super fan of ${team}: this is the named function`;
-}
-
-let canProduceSideEffects = [];
-
-console.log(
-  soccerTeams.map(function (team) {
-    // canProduceSideEffects.push('yes'); // DO NOT DO THIS
-    return { name: team, fanMessage: printTeamSupport(team) }; // Rely on the return value to transform arrays
-  }),
-);
-
-// console.log(teamObjs);
-
-// console.log(canProduceSideEffects);
-
-// create a new array with each team having it's own object
-let soccerTeamsV2 = [];
-
-soccerTeams.forEach(function (team, index) {
-  // let teamObj = {
-  //   name: team,
-  //   fanMessage: printTeamSupport(team);
-  // }
-  // soccerTeamsV2.push(teamObj);
-  soccerTeamsV2[index] = {};
-  soccerTeamsV2[index].name = team;
-  soccerTeamsV2[index].fanMessage = printTeamSupport(team);
-});
-
-// console.log(soccerTeamsV2);
 
 // do not edit the comics object
 const comics = [
@@ -59,16 +10,21 @@ const comics = [
 /**
  * 1
  *
- * Write a new function called getAuthors(). The function should take in an array of comics (like above) and return an array of just the authors' names.
+ * Write a new function called getAuthors(). 
+ * The function should take in an array of comics (like above) and return an array of just the authors' names.
  *
  * Do not use the .map() method just yet. Instead, use an accumulator pattern.
  */
-function getAuthors(comics) {
-  // Write your code here!
+function getAuthorsFor(data) {
+  let setAuthors = [];
+  for(let i=0; i < data.length; i++){
+    setAuthors.push(data[i].author)
+  }
+  return setAuthors;
 }
 
-const getAuthorsResult = getAuthors(comics);
-console.log(getAuthorsResult); //> [ "Bill Watterson", "Gavin Aung Than", "Olivia James", "Joshua Barkman"]
+const getAuthorsByFor = getAuthorsFor(comics);
+console.log(getAuthorsByFor); //> [ "Bill Watterson", "Gavin Aung Than", "Olivia James", "Joshua Barkman"]
 
 /**
  * 2
@@ -77,15 +33,24 @@ console.log(getAuthorsResult); //> [ "Bill Watterson", "Gavin Aung Than", "Olivi
  *
  * Compare what you had written with what you have now. What is a benefit of using the .map() method?
  */
+ function getAuthorsMap(comics) {
+  let setAuthors = [];
+  setAuthors = comics.map(element => element.author)
+  return setAuthors;
+}
+
+const getAuthorsByMap = getAuthorsMap(comics);
+console.log(getAuthorsByMap); //> [ "Bill Watterson", "Gavin Aung Than", "Olivia James", "Joshua Barkman"]
 
 /**
  * 3
  *
  * Mentally evaluate the code below before running it. What do you think will be logged out? Why?
+ * Will log out undefined because the return keyword is missing
  */
 
 function getTitle(comic) {
-  comic.title;
+  return comic.title; // >> Adding return
 }
 
 const getTitleResult = comics.map(getTitle);
